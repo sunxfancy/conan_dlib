@@ -1,0 +1,5 @@
+[requires]
+dlib/19.1.0@MojaveWastelander/stable
+
+[generators]
+cmake
