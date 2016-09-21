@@ -62,18 +62,18 @@ class DLibConan(ConanFile):
             lib_opt = " -DDLIB_ENABLE_ASSERTS=TRUE"
 
        
-        self.run('cmake %s/dlib %s %s' % (self.conanfile_directory, cmake.command_line, lib_opt))
-        self.run("cmake --build . %s" % cmake.build_config)
-
+        self.run("mkdir build")
+        self.run('cd build && cmake ../dlib %s %s' % (cmake.command_line, lib_opt))
+        self.run("cd build && cmake --build . %s" % cmake.build_config)
 
     def package(self):
         self.copy("*.h", dst="include/dlib", src="dlib/dlib")
-        self.copy("config.h", dst="include/dlib", src="dlib/dlib")
-        self.copy("revision.h", dst="include/dlib", src="dlib/dlib")
-        self.copy("*.lib", dst="lib", src="dlib/Release")
-        self.copy("*.lib", dst="lib", src="dlib/Debug")
-        self.copy("*.lib", dst="lib", src="lib")
-        self.copy("*.a", dst="lib", src="lib")
+        self.copy("config.h", dst="include/dlib", src="build/dlib")
+        self.copy("revision.h", dst="include/dlib", src="build/dlib")
+        self.copy("*.lib", dst="lib", src="build/dlib/Release")
+        self.copy("*.lib", dst="lib", src="build/dlib/Debug")
+        self.copy("*.so", dst="lib", src="build/dlib")
+        self.copy("*.a", dst="lib", src="build/dlib")
 
     def package_info(self):
         print("Compiler: %s %s" % (self.settings.compiler, self.settings.compiler.version))
