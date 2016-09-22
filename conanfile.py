@@ -11,7 +11,7 @@ class DLibConan(ConanFile):
     # keep default options as in library
     default_options = "iso_cpp_only=False", "enable_gif=True", "enable_png=True",    "enable_jpeg=True", "no_gui_support=False", "enable_stack_trace=False", "link_with_sqlite=True", "enable_asserts=False"
     license = "Boost"
-    url = ""
+    url = "https://github.com/MojaveWastelander/conan_dlib"
     
     def source(self):
         self.run("git clone https://github.com/davisking/dlib.git")
@@ -60,7 +60,11 @@ class DLibConan(ConanFile):
 
         if self.options.enable_asserts:
             lib_opt = " -DDLIB_ENABLE_ASSERTS=TRUE"
-
+            
+        replace_in_file("dlib/dlib/CMakeLists.txt", 'project(dlib)', '''project(dlib)
+include(../../conanbuildinfo.cmake)
+conan_basic_setup()
+''')
        
         self.run("mkdir build")
         self.run('cd build && cmake ../dlib %s %s' % (cmake.command_line, lib_opt))
