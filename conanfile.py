@@ -76,7 +76,7 @@ conan_basic_setup()
         self.copy("revision.h", dst="include/dlib", src="build/dlib")
         self.copy("*.lib", dst="lib", src="build/dlib/Release")
         self.copy("*.lib", dst="lib", src="build/dlib/Debug")
-        self.copy("*.lib", dst="lib", src="build/lib")
+        self.copy("*.lib", dst="lib", src="build/dlib/lib")
         self.copy("*.so", dst="lib", src="build/dlib")
         self.copy("*.a", dst="lib", src="build/dlib")
 
