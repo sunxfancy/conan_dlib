@@ -7,39 +7,36 @@ env:
   global:
     - CONAN_UPLOAD=1
     - CONAN_REFERENCE="dlib/19.1.0"
-    - CONAN_USERNAME="MojaveWastelander"
+    - CONAN_USERNAME="sunxfancy"
     - CONAN_CHANNEL="stable"
     - CONAN_TOTAL_PAGES=1
     - CONAN_CURRENT_PAGE=1
 
   matrix:
-    - CONAN_GCC_VERSIONS=4.9 CONAN_USE_DOCKER=1 
+    - CONAN_GCC_VERSIONS=4.9 CONAN_USE_DOCKER=1
     - CONAN_GCC_VERSIONS=5.2 CONAN_USE_DOCKER=1
     - CONAN_GCC_VERSIONS=5.3 CONAN_USE_DOCKER=1
+    
 matrix:
-  include:
-    - env: CXX=g++-5 CC=gcc-5
-      addons:
-        apt:
-          packages:
-            - g++-5
-          sources: 
-            - ubuntu-toolchain-r-test
-    - env: CXX=g++-4.9 CC=gcc-4.9
-      addons:
-        apt:
-          packages:
-            - g++-4.9
-          sources: 
-            - ubuntu-toolchain-r-test
+   include:
+       - os: osx
+         osx_image: xcode8.3 # apple-clang 8.1
+         language: generic
+         env:
+       - os: osx
+         osx_image: xcode8.2 # apple-clang 8.0
+         language: generic
+         env:
+       - os: osx
+         osx_image: xcode7.3 # apple-clang 7.3
+         language: generic
+         env:
 
 before_install:
  - sudo apt-get -qq update
  - sudo apt-get install -y libjpeg8-dev libpng-dev libx11-dev libxft-dev
- - chmod +x ./.travis/install.sh
- - chmod +x ./.travis/run.sh
 
 install:
-  - ./.travis/install.sh
+  - bash ./.travis/install.sh
 script:
-  - ./.travis/run.sh
+  - bash ./.travis/run.sh
