@@ -6,10 +6,10 @@ class DLibConan(ConanFile):
     generators = "cmake"
     version = "19.1.0"
     settings = "os", "compiler", "build_type", "arch"
-    options = {"iso_cpp_only" : [True, False], "enable_gif" : [True, False], "enable_png" : [True, False], "enable_jpeg" : [True, False], "no_gui_support" : [True, False], "enable_stack_trace" : [True, False], "link_with_sqlite" : [True, False],    "enable_asserts" : [True, False]}
+    options = {"iso_cpp_only" : [True, False], "use_blas" : [True, False], "use_lapack": [True, False], "enable_gif" : [True, False], "enable_png" : [True, False], "enable_jpeg" : [True, False], "no_gui_support" : [True, False], "enable_stack_trace" : [True, False], "link_with_sqlite" : [True, False],    "enable_asserts" : [True, False]}
 
     # keep default options as in library
-    default_options = "iso_cpp_only=False", "enable_gif=True", "enable_png=True",    "enable_jpeg=True", "no_gui_support=False", "enable_stack_trace=False", "link_with_sqlite=True", "enable_asserts=False"
+    default_options = "iso_cpp_only=False", "use_blas=False", "use_lapack=False", "enable_gif=True", "enable_png=True", "enable_jpeg=True", "no_gui_support=True", "enable_stack_trace=False", "link_with_sqlite=True", "enable_asserts=False"
     license = "Boost"
     url = "https://github.com/MojaveWastelander/conan_dlib"
 
@@ -52,6 +52,16 @@ class DLibConan(ConanFile):
             if self.options.link_with_sqlite:
                 lib_opt += " -DDLIB_LINK_WITH_SQLITE3=TRUE"
 
+            if self.options.use_blas:
+                lib_opt += " -DLIB_USE_BLAS=TRUE"
+            else:
+                lib_opt += " -DLIB_USE_BLAS=FALSE"
+
+            if self.options.use_lapack:
+                lib_opt += " -DLIB_USE_LAPACK=TRUE"
+            else:
+                lib_opt += " -DLIB_USE_LAPACK=FALSE"
+
         if self.options.no_gui_support:
             lib_opt = " -DDLIB_NO_GUI_SUPPORT=TRUE"
 
@@ -87,3 +97,7 @@ conan_basic_setup()
         if self.settings.compiler == "Visual Studio":
             print("Runtime: %s" % self.settings.compiler.runtime)
         self.cpp_info.libs = ["dlib"]
+        if self.options.use_blas:
+            self.cpp_info.libs.append("cblas")
+        if self.options.use_lapack:
+            self.cpp_info.libs.append("clapack")
