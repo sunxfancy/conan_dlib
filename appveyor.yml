@@ -1,5 +1,6 @@
 build: false
 image:
+  - Visual Studio 2015
   - Visual Studio 2017
 
 environment:
@@ -21,7 +22,6 @@ environment:
         - CONAN_CURRENT_PAGE: 4
 
 install:
-  - '"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"'
   - set PATH=%PYTHON%/Scripts/;%PATH%
   - pip.exe install conan_package_tools # It install conan too
   - conan user sunxfancy # It creates the conan data directory
