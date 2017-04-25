@@ -7,8 +7,9 @@ environment:
     CONAN_UPLOAD: 1
     CONAN_REFERENCE: "dlib/19.1.0"
     CONAN_USERNAME: "sunxfancy"
-    CONAN_CHANNEL: "stable"
+    CONAN_CHANNEL: "ci"
     CONAN_TOTAL_PAGES: 4
+    CONAN_STABLE_BRANCH_PATTERN: "release/*"
 
     matrix:
         - CONAN_CURRENT_PAGE: 1
@@ -17,7 +18,7 @@ environment:
         - CONAN_CURRENT_PAGE: 4
 
 install:
-  - set PATH=%PATH%;%PYTHON%/Scripts/
+  - set PATH=%PYTHON%/Scripts/;%PATH%
   - pip.exe install conan_package_tools # It install conan too
   - conan user sunxfancy # It creates the conan data directory
 
