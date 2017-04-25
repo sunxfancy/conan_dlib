@@ -9,7 +9,7 @@ class DLibConan(ConanFile):
     options = {"iso_cpp_only" : [True, False], "use_blas" : [True, False], "use_lapack": [True, False], "enable_gif" : [True, False], "enable_png" : [True, False], "enable_jpeg" : [True, False], "no_gui_support" : [True, False], "enable_stack_trace" : [True, False], "link_with_sqlite" : [True, False],    "enable_asserts" : [True, False]}
 
     # keep default options as in library
-    default_options = "iso_cpp_only=False", "use_blas=False", "use_lapack=False", "enable_gif=True", "enable_png=True", "enable_jpeg=True", "no_gui_support=True", "enable_stack_trace=False", "link_with_sqlite=True", "enable_asserts=False"
+    default_options = "iso_cpp_only=True", "use_blas=False", "use_lapack=False", "enable_gif=True", "enable_png=True", "enable_jpeg=True", "no_gui_support=True", "enable_stack_trace=False", "link_with_sqlite=True", "enable_asserts=False"
     license = "Boost"
     url = "https://github.com/MojaveWastelander/conan_dlib"
 
