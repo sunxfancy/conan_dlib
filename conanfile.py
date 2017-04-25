@@ -97,7 +97,6 @@ conan_basic_setup()
         if self.settings.compiler == "Visual Studio":
             print("Runtime: %s" % self.settings.compiler.runtime)
         self.cpp_info.libs = ["dlib"]
-        if self.options.use_blas:
+        if os_info.is_macos:
             self.cpp_info.libs.append("cblas")
-        if self.options.use_lapack:
             self.cpp_info.libs.append("clapack")
