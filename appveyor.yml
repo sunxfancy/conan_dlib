@@ -1,8 +1,8 @@
 build: false
 environment:
-    PYTHON: "C:\\Python27"
-    PYTHON_VERSION: "2.7.8"
-    PYTHON_ARCH: "32"
+    PYTHON: "C:\\Python27-x64"
+    PYTHON_VERSION: "2.7.11"
+    PYTHON_ARCH: "64"
 
     CONAN_UPLOAD: 1
     CONAN_REFERENCE: "dlib/19.1.0"
@@ -12,14 +12,14 @@ environment:
 
     matrix:
         - CONAN_CURRENT_PAGE: 1
-        - CONAN_CURRENT_PAGE: 2  
+        - CONAN_CURRENT_PAGE: 2
         - CONAN_CURRENT_PAGE: 3
         - CONAN_CURRENT_PAGE: 4
 
 install:
   - set PATH=%PATH%;%PYTHON%/Scripts/
   - pip.exe install conan_package_tools # It install conan too
-  - conan user # It creates the conan data directory
+  - conan user sunxfancy # It creates the conan data directory
 
 test_script:
-  - python build.py
+  - C:\Python27-x64\python build.py
