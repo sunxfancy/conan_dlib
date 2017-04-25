@@ -1,7 +1,7 @@
 build: false
 image:
-  - Visual Studio 2015
   - Visual Studio 2017
+  - Visual Studio 2015
 
 environment:
     PYTHON: "C:\\Python27-x64"
@@ -12,18 +12,17 @@ environment:
     CONAN_REFERENCE: "dlib/19.1.0"
     CONAN_USERNAME: "sunxfancy"
     CONAN_CHANNEL: "ci"
-    CONAN_TOTAL_PAGES: 4
+#    CONAN_TOTAL_PAGES: 4
     CONAN_STABLE_BRANCH_PATTERN: "master"
 
-    matrix:
-        - CONAN_CURRENT_PAGE: 1
-        - CONAN_CURRENT_PAGE: 2
-        - CONAN_CURRENT_PAGE: 3
-        - CONAN_CURRENT_PAGE: 4
+#    matrix:
+#        - CONAN_CURRENT_PAGE: 1
+#        - CONAN_CURRENT_PAGE: 2
+#        - CONAN_CURRENT_PAGE: 3
+#        - CONAN_CURRENT_PAGE: 4
 
 install:
   - ps: .appveyor/Invoke-BatchFile.ps1
-  - ps: If ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2017") { Invoke-BatchFile "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat" }
   - set PATH=%PYTHON%/Scripts/;%PATH%
   - pip.exe install conan_package_tools # It install conan too
   - conan user sunxfancy # It creates the conan data directory
