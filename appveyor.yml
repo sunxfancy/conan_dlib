@@ -22,7 +22,7 @@ environment:
 #        - CONAN_CURRENT_PAGE: 4
 
 install:
-  - ps: .appveyor/Invoke-BatchFile.ps1
+  - ps: .appveyor/setEnv.ps1
   - set PATH=%PYTHON%/Scripts/;%PATH%
   - pip.exe install conan_package_tools # It install conan too
   - conan user sunxfancy # It creates the conan data directory
