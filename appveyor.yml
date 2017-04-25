@@ -22,7 +22,8 @@ environment:
         - CONAN_CURRENT_PAGE: 4
 
 install:
-  - ps: If ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2017") { "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat" }
+  - ps: .appveyor/Invoke-BatchFile.ps1
+  - ps: If ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2017") { Invoke-BatchFile "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat" }
   - set PATH=%PYTHON%/Scripts/;%PATH%
   - pip.exe install conan_package_tools # It install conan too
   - conan user sunxfancy # It creates the conan data directory
