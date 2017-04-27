@@ -3,7 +3,7 @@ from conans.tools import os_info, SystemPackageTool
 import os
 
 # This easily allows to copy the package in other user or channel
-channel = os.getenv("CONAN_CHANNEL", "stable")
+channel = os.getenv("CONAN_CHANNEL", "ci")
 username = os.getenv("CONAN_USERNAME", "sunxfancy")
 
 class NanaTestConan(ConanFile):
@@ -14,7 +14,7 @@ class NanaTestConan(ConanFile):
         if os_info.linux_distro == "ubuntu":
             installer = SystemPackageTool()
             # Install the package, will update the package database if pack_name isn't already installed
-            installer.install("libjpeg8-dev libpng-dev libx11-dev libxft-dev") 
+            installer.install("libjpeg8-dev libpng-dev libx11-dev libxft-dev")
     def build(self):
         cmake = CMake(self.settings)
         self.run('cmake "%s" %s' % (self.conanfile_directory, cmake.command_line))
