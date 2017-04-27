@@ -11,7 +11,7 @@ class DLibConan(ConanFile):
     # keep default options as in library
     default_options = "iso_cpp_only=True", "build_PIC=False", "use_blas=False", "use_lapack=False", "enable_gif=True", "enable_png=True", "enable_jpeg=True", "no_gui_support=True", "enable_stack_trace=False", "link_with_sqlite=True", "enable_asserts=False"
     license = "Boost"
-    url = "https://github.com/MojaveWastelander/conan_dlib"
+    url = "https://github.com/sunxfancy/conan_dlib"
 
     def source(self):
         self.run("git clone https://github.com/davisking/dlib.git")

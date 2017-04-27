@@ -6,7 +6,7 @@ language: python
 env:
   global:
     - CONAN_UPLOAD=1
-    - CONAN_REFERENCE="dlib/19.1.0"
+    - CONAN_REFERENCE="dlib/19.1.1"
     - CONAN_USERNAME="sunxfancy"
     - CONAN_CHANNEL="ci"
     - CONAN_TOTAL_PAGES=1
