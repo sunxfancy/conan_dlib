@@ -14,6 +14,7 @@ class DLibConan(ConanFile):
     url = "https://github.com/sunxfancy/conan_dlib"
 
     def source(self):
+        self.run("git config --global http.sslVerify false")
         self.run("git clone https://github.com/davisking/dlib.git --depth=1")
 
     def requirements(self):

@@ -45,6 +45,5 @@ install:
   - ./.travis/install.sh
 
 script:
-  - git config --global http.sslVerify false
   - chmod +x .travis/run.sh
   - ./.travis/run.sh
