@@ -4,7 +4,7 @@ from conans.tools import unzip, replace_in_file, os_info, SystemPackageTool
 class DLibConan(ConanFile):
     name = "dlib"
     generators = "cmake"
-    version = "19.1.1"
+    version = "19.1.2"
     settings = "os", "compiler", "build_type", "arch"
     options = {"iso_cpp_only" : [True, False], "build_PIC" : [True, False], "use_blas" : [True, False], "use_lapack": [True, False], "enable_gif" : [True, False], "enable_png" : [True, False], "enable_jpeg" : [True, False], "no_gui_support" : [True, False], "enable_stack_trace" : [True, False], "link_with_sqlite" : [True, False],    "enable_asserts" : [True, False]}
 
@@ -14,7 +14,7 @@ class DLibConan(ConanFile):
     url = "https://github.com/sunxfancy/conan_dlib"
 
     def source(self):
-        self.run("git clone https://github.com/davisking/dlib.git")
+        self.run("git clone https://github.com/davisking/dlib.git --depth=1")
 
     def requirements(self):
         if not self.options.iso_cpp_only:
