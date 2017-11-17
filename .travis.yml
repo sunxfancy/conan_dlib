@@ -45,5 +45,6 @@ install:
   - ./.travis/install.sh
 
 script:
+  - export GIT_SSL_NO_VERIFY=true
   - chmod +x .travis/run.sh
   - ./.travis/run.sh
