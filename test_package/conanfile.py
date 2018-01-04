@@ -5,7 +5,7 @@ import os
 # This easily allows to copy the package in other user or channel
 channel = os.getenv("CONAN_CHANNEL", "ci")
 username = os.getenv("CONAN_USERNAME", "sunxfancy")
-reference = os.getenv("CONAN_REFERENCE", "dlib/19.1.2")
+reference = os.getenv("CONAN_REFERENCE", "dlib/19.1.3")
 class NanaTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     requires = "%s@%s/%s" % (reference, username, channel)
@@ -16,7 +16,7 @@ class NanaTestConan(ConanFile):
             # Install the package, will update the package database if pack_name isn't already installed
             installer.install("libjpeg8-dev libpng-dev libx11-dev libxft-dev")
     def build(self):
-        cmake = CMake(self.settings)
+        cmake = CMake(self)
         self.run('cmake "%s" %s' % (self.conanfile_directory, cmake.command_line))
         self.run("cmake --build . %s" % cmake.build_config)
 
