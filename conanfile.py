@@ -32,7 +32,7 @@ class DLibConan(ConanFile):
                 self.requires("sqlite3/3.14.1@rdeterre/stable")
 
     def build(self):
-        cmake = CMake(self.settings)
+        cmake = CMake(self)
         print("Compiler: %s %s" % (self.settings.compiler, self.settings.compiler.version))
         print("Arch: %s" % self.settings.arch)
 
