@@ -33,7 +33,7 @@ matrix:
       - <<: *linux
         env: CONAN_CLANG_VERSIONS=4.0 CONAN_DOCKER_IMAGE=lasote/conanclang40
       - <<: *osx
-        osx_image: xcode8.2
+        osx_image: xcode8.1
         env: CONAN_APPLE_CLANG_VERSIONS=8.0
       - <<: *osx
         osx_image: xcode8.3
