@@ -1,10 +1,11 @@
 from conans import ConanFile, CMake
 from conans.tools import unzip, replace_in_file, os_info, SystemPackageTool
+import os
 
 class DLibConan(ConanFile):
     name = "dlib"
     generators = "cmake"
-    version = "19.1.3"
+    version = "19.1.4"
     settings = "os", "compiler", "build_type", "arch"
     options = {"iso_cpp_only" : [True, False], "build_PIC" : [True, False], "use_blas" : [True, False], "use_lapack": [True, False], "enable_gif" : [True, False], "enable_png" : [True, False], "enable_jpeg" : [True, False], "no_gui_support" : [True, False], "enable_stack_trace" : [True, False], "link_with_sqlite" : [True, False],    "enable_asserts" : [True, False]}
 
@@ -79,10 +80,9 @@ class DLibConan(ConanFile):
 include(../../conanbuildinfo.cmake)
 conan_basic_setup()
 ''')
-
-        self.run("mkdir build")
-        self.run('cd build && cmake ../dlib %s %s' % (cmake.command_line, lib_opt))
-        self.run("cd build && cmake --build . %s" % cmake.build_config)
+        os.mkdir('build')
+        cmake.configure(build_dir="./build",source_dir="../dlib")
+        cmake.build()
 
     def package(self):
         self.copy("*.h", dst="include/dlib", src="dlib/dlib")
