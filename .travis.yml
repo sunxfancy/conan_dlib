@@ -1,6 +1,6 @@
 env:
    global:
-     - CONAN_REFERENCE: "dlib/19.1.4"
+     - CONAN_REFERENCE: "dlib/19.2.0"
      - CONAN_USERNAME: "sunxfancy"
      - CONAN_LOGIN_USERNAME: "sunxfancy"
      - CONAN_CHANNEL: "ci"

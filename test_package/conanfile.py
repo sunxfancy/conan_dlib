@@ -5,7 +5,7 @@ import os
 # This easily allows to copy the package in other user or channel
 channel = os.getenv("CONAN_CHANNEL", "ci")
 username = os.getenv("CONAN_USERNAME", "sunxfancy")
-reference = os.getenv("CONAN_REFERENCE", "dlib/19.1.4")
+reference = os.getenv("CONAN_REFERENCE", "dlib/19.2.0")
 class NanaTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     requires = "%s@%s/%s" % (reference, username, channel)
