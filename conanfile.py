@@ -81,7 +81,7 @@ include(../../conanbuildinfo.cmake)
 conan_basic_setup()
 ''')
         os.mkdir('build')
-        cmake.configure(build_dir="./build",source_dir="../dlib")
+        cmake.configure(lib_opt, build_dir="./build", source_dir="../dlib")
         cmake.build()
 
     def package(self):
