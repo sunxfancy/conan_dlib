@@ -17,8 +17,8 @@ class NanaTestConan(ConanFile):
             installer.install("libjpeg8-dev libpng-dev libx11-dev libxft-dev")
     def build(self):
         cmake = CMake(self)
-        self.run('cmake "%s" %s' % (self.conanfile_directory, cmake.command_line))
-        self.run("cmake --build . %s" % cmake.build_config)
+        cmake.configure()
+        cmake.build()
 
     def test(self):
         self.run(os.sep.join([".","bin", "dlib_test"]))
