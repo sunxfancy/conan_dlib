@@ -44,8 +44,6 @@ conan_basic_setup()
 
     def build(self):
         cmake = CMake(self)
-        print("Compiler: %s %s" % (self.settings.compiler, self.settings.compiler.version))
-        print("Arch: %s" % self.settings.arch)
 
         lib_opt = []
 
@@ -103,11 +101,8 @@ conan_basic_setup()
         self.copy("*.a", dst="lib", src="build/dlib/lib")
 
     def package_info(self):
-        print("Compiler: %s %s" % (self.settings.compiler, self.settings.compiler.version))
-        print("Arch: %s" % self.settings.arch)
-        print("Build_type: %s" % self.settings.build_type)
         if self.settings.compiler == "Visual Studio":
-            print("Runtime: %s" % self.settings.compiler.runtime)
+            print("Runtime: {}".format(self.settings.compiler.runtime))
         self.cpp_info.libs = ["dlib"]
         if os_info.is_macos:
             self.cpp_info.libs.append("cblas")
