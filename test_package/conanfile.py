@@ -20,5 +20,10 @@ class NanaTestConan(ConanFile):
         cmake.configure()
         cmake.build()
 
+    def imports(self):
+        self.copy(pattern="*.dll", dst="bin", src="lib")
+        self.copy(pattern="*.so*", dst="bin", src="lib")
+        self.copy(pattern="*.dylib", dst="bin", src="lib")
+
     def test(self):
         self.run(os.sep.join([".","bin", "dlib_test"]))

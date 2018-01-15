@@ -9,8 +9,9 @@ class DLibConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "iso_cpp_only" : [True, False], "use_blas" : [True, False], "use_lapack": [True, False], "enable_gif" : [True, False], "enable_png" : [True, False], "enable_jpeg" : [True, False], "no_gui_support" : [True, False], "enable_stack_trace" : [True, False], "link_with_sqlite" : [True, False],    "enable_asserts" : [True, False]}
 
+    # shared option目前没有啥效果，因为dlib会自动构建静态库和动态库两种，而且由于两个库名字一样，cmake会优先链接动态库
     # keep default options as in library
-    default_options = "shared=False", "iso_cpp_only=True", "use_blas=False", "use_lapack=False", "enable_gif=True", "enable_png=True", "enable_jpeg=True", "no_gui_support=True", "enable_stack_trace=False", "link_with_sqlite=True", "enable_asserts=False"
+    default_options = "shared=True", "iso_cpp_only=True", "use_blas=False", "use_lapack=False", "enable_gif=True", "enable_png=True", "enable_jpeg=True", "no_gui_support=True", "enable_stack_trace=False", "link_with_sqlite=True", "enable_asserts=False"
     license = "Boost"
     url = "https://github.com/sunxfancy/conan_dlib"
 
@@ -22,8 +23,6 @@ class DLibConan(ConanFile):
         download(self.download_url, self.file_name)
         unzip(self.file_name)
         os.unlink(self.file_name)
-        if os.path.exists('dlib'):
-            os.unlink('dlib')
         os.rename(self.source_folder_name, 'dlib')
         replace_in_file("dlib/dlib/CMakeLists.txt", 'project(dlib)', '''project(dlib)
 include(../../conanbuildinfo.cmake)
@@ -84,6 +83,9 @@ conan_basic_setup()
         if self.options.enable_asserts:
             lib_opt.append("-DDLIB_ENABLE_ASSERTS=TRUE")
 
+        if self.options.shared:
+            lib_opt.append("-DBUILD_SHARED_LIBS=ON")
+
         os.mkdir('build')
         cmake.configure(lib_opt, build_dir="build", source_dir=os.path.join(self.source_folder, "dlib"))
         cmake.build()
@@ -95,7 +97,9 @@ conan_basic_setup()
         self.copy("*.lib", dst="lib", src="build/dlib/Release")
         self.copy("*.lib", dst="lib", src="build/dlib/Debug")
         self.copy("*.lib", dst="lib", src="build/dlib/lib")
-        self.copy("*.so", dst="lib", src="build/dlib/lib")
+        self.copy("*.so*", dst="lib", src="build/dlib/lib")
+        self.copy("*.dylib", dst="lib", src="build/dlib/lib")
+        self.copy("*.dll", dst="lib", src="build/dlib/lib")
         self.copy("*.a", dst="lib", src="build/dlib/lib")
 
     def package_info(self):
