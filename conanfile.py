@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from conans import ConanFile, CMake
 from conans.tools import unzip, download, replace_in_file, os_info, SystemPackageTool
 import os
@@ -9,7 +12,7 @@ class DLibConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "iso_cpp_only" : [True, False], "use_blas" : [True, False], "use_lapack": [True, False], "enable_gif" : [True, False], "enable_png" : [True, False], "enable_jpeg" : [True, False], "no_gui_support" : [True, False], "enable_stack_trace" : [True, False], "link_with_sqlite" : [True, False],    "enable_asserts" : [True, False]}
 
-    # shared option目前没有啥效果，因为dlib会自动构建静态库和动态库两种，而且由于两个库名字一样，cmake会优先链接动态库
+    # shared option has no use at all, because the dlib will create both shared library and static library. The shared version will be used defaultly
     # keep default options as in library
     default_options = "shared=True", "iso_cpp_only=True", "use_blas=False", "use_lapack=False", "enable_gif=True", "enable_png=True", "enable_jpeg=True", "no_gui_support=True", "enable_stack_trace=False", "link_with_sqlite=True", "enable_asserts=False"
     license = "Boost"
